@@ -55,6 +55,16 @@ namespace ProyectoEjemploQuestPDF
                             .SemiBold();
 
                         page.Content()
+                            .Row( row => 
+                            {
+                                row.RelativeItem()
+                                .Image("../../assets/twitter.png");
+
+                                row.RelativeItem()
+                                    .Text("Jose Alfredo");
+                            });
+
+                        page.Content()
                             .Column( column =>
                             {
                                 column.Spacing(0.5f, Unit.Inch);
@@ -68,14 +78,14 @@ namespace ProyectoEjemploQuestPDF
                                     .Image(ruta);
 
                                 column.Item()
-                                    .Text(Placeholders.LoremIpsum())
+                                    .Text(Placeholders.LoremIpsum() + Placeholders.LoremIpsum())
                                     .FontSize(18);
                             });
                         page.Footer()
                             .AlignCenter()
                             .Text(text =>
                            {
-                               text.DefaultTextStyle(x => x.FontSize(18));
+                               text.DefaultTextStyle(x => x.FontSize(10));
 
                                text.CurrentPageNumber();
                                text.Span(" / ");
