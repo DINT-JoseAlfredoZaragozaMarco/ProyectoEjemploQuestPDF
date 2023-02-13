@@ -55,19 +55,9 @@ namespace ProyectoEjemploQuestPDF
                             .SemiBold();
 
                         page.Content()
-                            .Row( row => 
-                            {
-                                row.RelativeItem()
-                                .Image("../../assets/twitter.png");
-
-                                row.RelativeItem()
-                                    .Text("Jose Alfredo");
-                            });
-
-                        page.Content()
                             .Column( column =>
                             {
-                                column.Spacing(0.5f, Unit.Inch);
+                                column.Spacing(0.1f, Unit.Inch);
 
                                 using (WebClient client = new WebClient())
                                 {
@@ -77,10 +67,20 @@ namespace ProyectoEjemploQuestPDF
                                 column.Item()
                                     .Image(ruta);
 
+                                column.Item().AlignRight().Row(y =>
+                                {
+                                    y.ConstantItem(20)
+                                        .Image("../../assets/twitter.png");
+
+                                    y.RelativeItem()
+                                       .Text("Jose Alfredo");
+                                });
+
                                 column.Item()
                                     .Text(Placeholders.LoremIpsum() + Placeholders.LoremIpsum())
                                     .FontSize(18);
                             });
+
                         page.Footer()
                             .AlignCenter()
                             .Text(text =>
@@ -90,6 +90,7 @@ namespace ProyectoEjemploQuestPDF
                                text.CurrentPageNumber();
                                text.Span(" / ");
                                text.TotalPages();
+
                            });
                     });
                 }).GeneratePdf("Documento.pdf");
